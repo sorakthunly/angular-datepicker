@@ -3,6 +3,7 @@
 & {
   dp-day-calendar {
     display: inline-block;
+    width: 7 * @basic-height + 2px;
 
     .dp-day-calendar-container {
       background: @c-white;
@@ -10,7 +11,17 @@
 
     .dp-calendar-wrapper {
       box-sizing: border-box;
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 100%;
       border: 1px solid @c-black;
+
+      td, th {
+        height: @basic-height;
+        width: auto;
+        text-align: center;
+        padding: 0;
+      }
 
       .dp-calendar-weekday:first-child {
         border-left: none;
@@ -25,16 +36,16 @@
     .dp-calendar-weekday {
       box-sizing: border-box;
       display: inline-block;
-      width: @basic-height;
-      text-align: center;
+      width: 100%;
       border-left: 1px solid @c-black;
       border-bottom: 1px solid @c-black;
     }
 
     .dp-calendar-day {
       box-sizing: border-box;
-      width: @basic-height;
       height: @basic-height;
+      width: 100%;
+      padding: 0;
       cursor: pointer;
     }
 
@@ -54,8 +65,8 @@
     }
 
     .dp-week-number {
-      position: absolute;
       font-size: 9px;
+      width: 9px;
     }
 
     &.dp-material {

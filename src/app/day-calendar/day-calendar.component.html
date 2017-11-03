@@ -12,29 +12,39 @@
       (goToCurrent)="goToCurrent()">
   </dp-calendar-nav>
 
-  <div class="dp-calendar-wrapper"
-       [ngClass]="{'dp-hide-near-month': !componentConfig.showNearMonthDays}">
-    <div class="dp-weekdays">
-      <span class="dp-calendar-weekday"
+  <table class="dp-calendar-wrapper" [ngClass]="{'dp-hide-near-month': !componentConfig.showNearMonthDays}">
+    <thead>
+      <tr class="dp-weekdays">
+        <th class="dp-week-number"
+            *ngIf="componentConfig.showWeekNumbers">
+        </th>
+        <th class="dp-calendar-weekday"
             *ngFor="let weekday of weekdays"
             [innerText]="getWeekdayName(weekday)">
-      </span>
-    </div>
-    <div class="dp-calendar-week" *ngFor="let week of weeks">
-      <span class="dp-week-number"
-            *ngIf="componentConfig.showWeekNumbers"
-            [innerText]="week[0].date.isoWeek()">
-      </span>
-      <button type="button"
-              class="dp-calendar-day"
-              *ngFor="let day of week"
-              (click)="dayClicked(day)"
-              [disabled]="day.disabled"
-              [ngClass]="getDayBtnCssClass(day)"
-              [innerText]="getDayBtnText(day)">
-      </button>
-    </div>
-  </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="dp-calendar-week" *ngFor="let week of weeks">
+      <td class="dp-week-number"
+          *ngIf="componentConfig.showWeekNumbers"
+          [innerText]="week[0].date.isoWeek()">
+      </td>
+      <td *ngFor="let day of week">
+        <button type="button"
+                class="dp-calendar-day"
+                (click)="dayClicked(day)"
+                [disabled]="day.disabled"
+                [ngClass]="getDayBtnCssClass(day)"
+                [innerText]="getDayBtnText(day)">
+        </button>
+      </td>
+    </tr>
+    </tbody>
+
+
+  </table>
+
 </div>
 
 <dp-month-calendar
