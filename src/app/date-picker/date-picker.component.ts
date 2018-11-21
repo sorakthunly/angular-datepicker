@@ -410,8 +410,21 @@ export class DatePickerComponent implements OnChanges,
     this.cd.markForCheck();
   }
 
-  onViewDateChange(value: string) {
-    if (value && (value.length === 2 || value.length === 5)) value += '-';
+  onViewDateChange(value: string, inputElement?: any) {
+    if (inputElement) {
+      const lastValue = value[value.length - 1];
+
+      if (value.length === 3 && lastValue !== '-') {
+        value = [value.slice(0, 2), value[value.length - 1]].join('-');
+        inputElement.value = [value.slice(0, 2), value[value.length - 1]].join('-');
+      }
+
+      if (value.length === 6 && lastValue !== '-') {
+        value = [value.slice(0, 5), value[value.length - 1]].join('-');
+        inputElement.value = [value.slice(0, 5), value[value.length - 1]].join('-');
+      }      
+    }
+
     if (this.dayPickerService.isValidInputDateValue(value, this.componentConfig)) {
       this.selected = this.dayPickerService.convertInputValueToMomentArray(value, this.componentConfig);
       this.currentDateView = this.selected.length

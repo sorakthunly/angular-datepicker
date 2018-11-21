@@ -2,11 +2,11 @@
   <div class="dp-input-container"
        [hidden]="componentConfig.hideInputContainer"
        [attr.data-hidden]="componentConfig.hideInputContainer">
-    <input type="text"
+    <input type="text" #datePickerTextInput
            class="dp-picker-input"
            [placeholder]="placeholder"
            [ngModel]="inputElementValue"
-           (ngModelChange)="onViewDateChange($event)"
+           (ngModelChange)="onViewDateChange($event, datePickerTextInput)"
            (focus)="inputFocused()"
            (blur)="inputBlurred($event.target.value)"
            [readonly]="componentConfig.disableKeypress"
